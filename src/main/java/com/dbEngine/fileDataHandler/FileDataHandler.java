@@ -14,7 +14,7 @@ public class FileDataHandler {
 
 		try {
 			//reading the csv file
-			FileReader reader = new FileReader("../dbEngine/ipl.csv");
+			FileReader reader = new FileReader("ipl.csv");
 			BufferedReader bfreader = new BufferedReader(reader);
 			//reading line by line
 			String line = bfreader.readLine();
