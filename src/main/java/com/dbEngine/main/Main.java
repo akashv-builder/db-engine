@@ -26,21 +26,18 @@ public class Main {
 			// calling get query method
 			System.out.println(qp.getQuery());
 			// setting base part
-			qp.setBasePart();
+			
 			// get the base part
-			System.out.println(qp.getBasePart());
+			System.out.println(qp.setBasePart(query));
 			// setting after where part
-			qp.setAfterWherePart();
 			// printing after where part
-			System.out.println(qp.getAfterWherePart());
+			System.out.println(qp.setAfterWherePart(query));
 			// setting file name
-			qp.setFileName();
 			// getting file name
-			System.out.println(qp.getFileName());
+			System.out.println(qp.setFileName(query));
 			// setting the conditions of where
-			qp.setDesired();
 			// getting conditions
-			String[] s = qp.getDesired();
+			String[] s = qp.setDesired(qp.setBasePart(query));
 			// getting no of fields in conditions
 			int noOfFields = s.length;
 			System.out.println(noOfFields);
@@ -58,7 +55,7 @@ public class Main {
 			// splitting the header
 			String[] headerSplit = header.split(",");
 			// getting after where part
-			String temp = qp.getAfterWherePart();
+			String temp = qp.setAfterWherePart(query);
 			if (temp == null) {
 
 				if (s.length == 1 && s[0].equals("*")) {
@@ -93,12 +90,12 @@ public class Main {
 				// select city id from ipl.csv where conditions;
 
 				ArrayList<String> conditions = new ArrayList<>();
-				conditions = qp.getConditions();
+				conditions = qp.setConditions(qp.setAfterWherePart(query));
 
 				ArrayList<String> conditionName = new ArrayList<>();
 				ArrayList<String> conditionoperator = new ArrayList<>();
 				ArrayList<String> conditionActual = new ArrayList<>();
-				String s1 = qp.getAfterWherePart();
+				String s1 = qp.setAfterWherePart(query);
 				if (s1 != null) {
 					Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)(<=|>=|<>|=|>|<)([ ]?[']?)([A-Za-z0-9]+)([']?)");
 					Matcher m2 = p2.matcher(s1);

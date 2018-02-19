@@ -27,31 +27,29 @@ public class QueryParameters {
 	}
 
 	// function to tokenize the query
-	public void tokenizeQuery() {
+	public String[] tokenizeQuery(String query) {
 
-		if (!inputQuery.equals("")) {
-			split = inputQuery.split("[ ,]");
+		if (!query.equals("")) {
+			split = query.split("[ ,]");
 		} else {
 			split = null;
 		}
-	}
-
-	// function to get the tokenized query
-	public String[] getTokenize() {
 		return split;
 	}
 
-	// function to get the base part of query
-	public void setBasePart() {
 
-		if (!inputQuery.equals("")) {
-			int indexOfWhere = inputQuery.indexOf("where");
-			int indexOfSemiColon = inputQuery.indexOf(";");
+
+	// function to get the base part of query
+	public String setBasePart(String query) {
+
+		if (!query.equals("")) {
+			int indexOfWhere = query.indexOf("where");
+			int indexOfSemiColon = query.indexOf(";");
 			if (indexOfWhere != -1) {
-				baseQuery = inputQuery.substring(0, indexOfWhere - 1);
+				baseQuery = query.substring(0, indexOfWhere - 1);
 			} else if (indexOfSemiColon != -1) {
 
-				baseQuery = inputQuery.substring(0, indexOfSemiColon - 1);
+				baseQuery = query.substring(0, indexOfSemiColon - 1);
 			} else {
 				baseQuery = null;
 			}
@@ -59,20 +57,18 @@ public class QueryParameters {
 		} else {
 			baseQuery = null;
 		}
-
-	}
-
-	// function to return the base part of query
-	public String getBasePart() {
 		return baseQuery;
+
 	}
+
+	
 
 	// function to get the after part of query
-	public void setAfterWherePart() {
-		if (!inputQuery.equals("")) {
-			int indexOfWhere = inputQuery.indexOf("where");
+	public String setAfterWherePart(String query) {
+		if (!query.equals("")) {
+			int indexOfWhere = query.indexOf("where");
 			if (indexOfWhere != -1) {
-				afterWhereQuery = inputQuery.substring(indexOfWhere + 6, inputQuery.length());
+				afterWhereQuery = query.substring(indexOfWhere + 6, query.length());
 
 			} else {
 				afterWhereQuery = null;
@@ -80,79 +76,73 @@ public class QueryParameters {
 		} else {
 			afterWhereQuery = null;
 		}
-	}
-
-	// function to return the after where part of query
-	public String getAfterWherePart() {
 		return afterWhereQuery;
 	}
+
+	
 	//function to set the file name
-	public void setFileName() {
-		if (!inputQuery.equals("")) {
+	public ArrayList<String> setFileName(String query) {
+		if (!query.equals("")) {
 			Pattern p = Pattern.compile("[a-zA-Z0-9]+\\.(csv)");
-			Matcher m = p.matcher(inputQuery);
+			Matcher m = p.matcher(query);
 			while (m.find()) {
 				fileName.add(m.group());
 			}
 		}
-	}
-	//function to get the file name
-	public ArrayList<String> getFileName() {
 		return fileName;
 	}
+	
 	//function to get the conditions in the query
-	public void setConditions() {
-		if (afterWhereQuery != null) {
+	//need afterwhere query
+	public ArrayList<String> setConditions(String query) {
+		if (query != null) {
 			Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)((<=)|(>=)|(<>)|=|>|<)([ ]?[']?[A-Za-z0-9]+[']?)");
-			Matcher m2 = p2.matcher(afterWhereQuery);
+			Matcher m2 = p2.matcher(query);
 
 			while (m2.find()) {
 				conditions.add(m2.group());
 			}
 		}
-	}
-	
-	//function returning the conditions
-	public ArrayList<String> getConditions() {
 		return conditions;
 	}
+	
+	
 	//function to get the operators in the query
-	public void setOperator() {
-		if (afterWhereQuery != null) {
+	//need after where query
+	public ArrayList<String> setOperator(String query) {
+		if (query != null) {
 			Pattern p3 = Pattern.compile("(and)|(or){2}|(not)");
-			Matcher m3 = p3.matcher(afterWhereQuery);
+			Matcher m3 = p3.matcher(query);
 
 			while (m3.find()) {
 				operators.add(m3.group());
 			}
 		}
-	}
-	//function to return the operator fetched
-	public ArrayList<String> getOperators() {
 		return operators;
 	}
+	
 	//function to get all the condition of where clause
-	public void setDesired() {
-		if (baseQuery != null) {
-			int index_of_from = baseQuery.indexOf("from");
-			int index_of_select = baseQuery.indexOf("select");
+	//need base query
+	public String[] setDesired(String query) {
+		if (query != null) {
+			int index_of_from = query.indexOf("from");
+			int index_of_select = query.indexOf("select");
 
-			String selected_fields = baseQuery.substring(index_of_select + 7, index_of_from);
+			String selected_fields = query.substring(index_of_select + 7, index_of_from);
 
 			if (!(selected_fields.equals("*"))) {
 				selectedFieldsSplit = selected_fields.split("[ ,]");
 			}
 		}
-	}
-	//function to get all the where conditions
-	public String[] getDesired() {
 		return selectedFieldsSplit;
 	}
+	
 	//finding the order by field of the query
-	public void setOrderBy() {
-		if (afterWhereQuery != null) {
+	//after where query
+	public String setOrderBy(String query) {
+		if (query != null) {
 			Pattern p4 = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
-			Matcher m4 = p4.matcher(afterWhereQuery);
+			Matcher m4 = p4.matcher(query);
 			if (m4.find()) {
 
 				m4.group();
@@ -161,16 +151,15 @@ public class QueryParameters {
 			}
 
 		}
-	}
-	//getting the order by field
-	public String getOrderBy() {
 		return orderByField;
 	}
+	
 	//finding the group by field of the query
-	public void setGroupBy() {
-		if (afterWhereQuery != null) {
+	//after where query
+	public String setGroupBy(String query) {
+		if (query != null) {
 			Pattern p5 = Pattern.compile("(group by)[ ]?[A-Za-z_]+");
-			Matcher m5 = p5.matcher(afterWhereQuery);
+			Matcher m5 = p5.matcher(query);
 
 			if (m5.find()) {
 				m5.group();
@@ -179,24 +168,19 @@ public class QueryParameters {
 			}
 
 		}
-	}
-	//getting the group by field
-	public String getGroupBy() {
 		return groupByField;
 	}
+	
 	//finding the aggregate field the query
-	public void setAggregate() {
-		if (baseQuery != null) {
+	//base query
+	public ArrayList<String> setAggregate(String query) {
+		if (query != null) {
 			Pattern p6 = Pattern.compile("(sum|avg|min|max)(\\([A-Za-z_]*\\))");
-			Matcher m6 = p6.matcher(baseQuery);
+			Matcher m6 = p6.matcher(query);
 			while (m6.find()) {
 				aggregate.add(m6.group());
 			}
 		}
-	}
-	//returning the aggregate field
-	public ArrayList<String> getAggregate() {
 		return aggregate;
 	}
-
 }
