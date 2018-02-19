@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FileDataHandler {
-	private ArrayList<String> fileStore = new ArrayList<>();
+	private ArrayList<String> fileStore = new ArrayList<String>();
 	private HashMap<String, String> mapDataType = new HashMap<String, String>();
 
 	public void setDataType() {
@@ -33,7 +33,7 @@ public class FileDataHandler {
 		String[] key = fileStore.get(0).split(",");
 
 		//determining the data type of each field
-		ArrayList<String> dataType = new ArrayList<>();
+		ArrayList<String> dataType = new ArrayList<String>();
 		for (String data : splitLine1) {
 			try {
 				Integer.parseInt(data);
