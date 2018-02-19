@@ -26,15 +26,11 @@ public class Main {
 			System.out.println("You have entered");
 			// calling get query method
 			System.out.println(qp.getQuery());
-			// setting base part
-			
 			// get the base part
 			System.out.println(qp.setBasePart(query));
-			// setting after where part
 			// printing after where part
 			System.out.println(qp.setAfterWherePart(query));
 			// setting file name
-			// getting file name
 			System.out.println(qp.setFileName(query));
 			// setting the conditions of where
 			// getting conditions

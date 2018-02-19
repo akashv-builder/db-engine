@@ -60,9 +60,6 @@ public class QueryParameters {
 		return baseQuery;
 
 	}
-
-	
-
 	// function to get the after part of query
 	public String setAfterWherePart(String query) {
 		if (!query.equals("")) {
@@ -93,7 +90,6 @@ public class QueryParameters {
 	}
 	
 	//function to get the conditions in the query
-	//need afterwhere query
 	public ArrayList<String> setConditions(String query) {
 		if (query != null) {
 			Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)((<=)|(>=)|(<>)|=|>|<)([ ]?[']?[A-Za-z0-9]+[']?)");
@@ -108,7 +104,6 @@ public class QueryParameters {
 	
 	
 	//function to get the operators in the query
-	//need after where query
 	public ArrayList<String> setOperator(String query) {
 		if (query != null) {
 			Pattern p3 = Pattern.compile("(and)|(or){2}|(not)");
@@ -122,7 +117,6 @@ public class QueryParameters {
 	}
 	
 	//function to get all the condition of where clause
-	//need base query
 	public String[] setDesired(String query) {
 		if (query != null) {
 			int index_of_from = query.indexOf("from");
@@ -138,7 +132,6 @@ public class QueryParameters {
 	}
 	
 	//finding the order by field of the query
-	//after where query
 	public String setOrderBy(String query) {
 		if (query != null) {
 			Pattern p4 = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
@@ -155,7 +148,6 @@ public class QueryParameters {
 	}
 	
 	//finding the group by field of the query
-	//after where query
 	public String setGroupBy(String query) {
 		if (query != null) {
 			Pattern p5 = Pattern.compile("(group by)[ ]?[A-Za-z_]+");
@@ -172,7 +164,6 @@ public class QueryParameters {
 	}
 	
 	//finding the aggregate field the query
-	//base query
 	public ArrayList<String> setAggregate(String query) {
 		if (query != null) {
 			Pattern p6 = Pattern.compile("(sum|avg|min|max)(\\([A-Za-z_]*\\))");
