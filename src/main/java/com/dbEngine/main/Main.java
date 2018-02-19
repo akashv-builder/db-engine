@@ -20,7 +20,8 @@ public class Main {
 			System.out.println("Enter query");
 			// calling set query method
 
-			String query = sc.nextLine();
+			//String query = sc.nextLine();
+			String query = "select * from ipl.cvs ;";
 			qp.setQuery(query);
 			System.out.println("You have entered");
 			// calling get query method
