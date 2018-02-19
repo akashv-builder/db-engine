@@ -1,6 +1,8 @@
 package com.dbEngine.Test;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -72,32 +74,28 @@ class TestQueryParameter {
     void seventhTest() {
     	String query="select * from ipl.csv where id>100 and city='Banglore' ;";
     	ArrayList<String> al= new ArrayList<String>();
-    	al.add(">");
-    	al.add("=");
+    	al.add("and");
     	assertEquals(al,qp.setOperator(query));
         System.out.println("Seventh test method");
     }
     @Test
     void eighthTest() {
     	String query="select * from ipl.csv where id>100 and city='Banglore' ;";
-    	ArrayList<String> al= new ArrayList<String>();
-    	al.add("*");
-    	assertEquals(al,qp.setDesired(query));
+    	String[] al= {"*"};
+    	assertArrayEquals(al,qp.setDesired(query));
         System.out.println("Eighth test method");
     }
     @Test
     void ninthTest() {
     	String query="select * from ipl.csv where id>100 and city='Banglore' order by city ;";
-    	ArrayList<String> al= new ArrayList<String>();
-    	al.add("city");
+    	String al="city";
     	assertEquals(al,qp.setOrderBy(query));
         System.out.println("Nigth test method");
     }
     @Test
     void tenthTest() {
     	String query="select * from ipl.csv where id>100 and city='Banglore' order by city group by id ;";
-    	ArrayList<String> al= new ArrayList<String>();
-    	al.add("id");
+    	String al="id";
     	assertEquals(al,qp.setGroupBy(query));
         System.out.println("Tenth test method");
     }
@@ -106,7 +104,7 @@ class TestQueryParameter {
     	String query="select * sum(id) from ipl.csv where id>100 and city='Banglore' order by city group by id ;";
     	ArrayList<String> al= new ArrayList<String>();
     	al.add("sum(id)");
-    	assertEquals(al,qp.setGroupBy(query));
+    	assertEquals(al,qp.setAggregate(query));
         System.out.println("Eleventh test method");
     }
     
