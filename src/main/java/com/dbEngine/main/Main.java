@@ -89,12 +89,12 @@ public class Main {
 				// iterating the data and getting the desired output for command
 				// select city id from ipl.csv where conditions;
 
-				ArrayList<String> conditions = new ArrayList<>();
+				ArrayList<String> conditions = new ArrayList<String>();
 				conditions = qp.setConditions(qp.setAfterWherePart(query));
 
-				ArrayList<String> conditionName = new ArrayList<>();
-				ArrayList<String> conditionoperator = new ArrayList<>();
-				ArrayList<String> conditionActual = new ArrayList<>();
+				ArrayList<String> conditionName = new ArrayList<String>();
+				ArrayList<String> conditionoperator = new ArrayList<String>();
+				ArrayList<String> conditionActual = new ArrayList<String>();
 				String s1 = qp.setAfterWherePart(query);
 				if (s1 != null) {
 					Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)(<=|>=|<>|=|>|<)([ ]?[']?)([A-Za-z0-9]+)([']?)");

@@ -8,13 +8,13 @@ public class QueryParameters {
 	private String baseQuery = null;
 	private String afterWhereQuery = null;
 	private String[] split = null;
-	private ArrayList<String> fileName = new ArrayList<>();
-	private ArrayList<String> conditions = new ArrayList<>();
-	private ArrayList<String> operators = new ArrayList<>();
+	private ArrayList<String> fileName = new ArrayList<String>();
+	private ArrayList<String> conditions = new ArrayList<String>();
+	private ArrayList<String> operators = new ArrayList<String>();
 	private String[] selectedFieldsSplit = null;
 	private String orderByField = null;
 	private String groupByField = null;
-	private ArrayList<String> aggregate = new ArrayList<>();
+	private ArrayList<String> aggregate = new ArrayList<String>();
 
 	// function to get the query from user
 	public void setQuery(String query) {
