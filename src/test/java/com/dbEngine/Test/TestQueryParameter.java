@@ -1,8 +1,6 @@
 package com.dbEngine.Test;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -11,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+
 import com.dbEngine.queryParameter.QueryParameters;
 
 @RunWith(JUnitPlatform.class)
@@ -25,7 +24,7 @@ class TestQueryParameter {
     	
         System.out.println("Before each test method");
     }
-    
+  
     @Test
     void firstTest() {
     	
