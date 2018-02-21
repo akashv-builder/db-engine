@@ -78,10 +78,10 @@ public class QueryParameters {
 	// function to set the file name
 	public ArrayList<String> setFileName(String query) {
 		if (!query.equals("")) {
-			Pattern p = Pattern.compile("[a-zA-Z0-9]+\\.(csv)");
-			Matcher m = p.matcher(query);
-			while (m.find()) {
-				fileName.add(m.group());
+			Pattern pattern = Pattern.compile("[a-zA-Z0-9]+\\.(csv)");
+			Matcher matcher = pattern.matcher(query);
+			while (matcher.find()) {
+				fileName.add(matcher.group());
 			}
 		}
 		return fileName;
@@ -90,11 +90,11 @@ public class QueryParameters {
 	// function to get the conditions in the query
 	public ArrayList<String> setConditions(String query) {
 		if (query != null) {
-			Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)((<=)|(>=)|(<>)|=|>|<)([ ]?[']?[A-Za-z0-9]+[']?)");
-			Matcher m2 = p2.matcher(query);
+			Pattern pattern = Pattern.compile("([A-Za-z0-9]+[ ]?)((<=)|(>=)|(<>)|=|>|<)([ ]?[']?[A-Za-z0-9]+[']?)");
+			Matcher matcher = pattern.matcher(query);
 
-			while (m2.find()) {
-				conditions.add(m2.group());
+			while (matcher.find()) {
+				conditions.add(matcher.group());
 			}
 		}
 		return conditions;
@@ -103,11 +103,11 @@ public class QueryParameters {
 	// function to get the operators in the query
 	public ArrayList<String> setOperator(String query) {
 		if (query != null) {
-			Pattern p3 = Pattern.compile("(and)|(or){2}|(not)");
-			Matcher m3 = p3.matcher(query);
+			Pattern pattern = Pattern.compile("(and)|(or){2}|(not)");
+			Matcher matcher = pattern.matcher(query);
 
-			while (m3.find()) {
-				operators.add(m3.group());
+			while (matcher.find()) {
+				operators.add(matcher.group());
 			}
 		}
 		return operators;
@@ -131,15 +131,14 @@ public class QueryParameters {
 	// finding the order by field of the query
 	public String setOrderBy(String query) {
 		if (query != null) {
-			Pattern p4 = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
-			Matcher m4 = p4.matcher(query);
-			if (m4.find()) {
+			Pattern pattern = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
+			Matcher matcher = pattern.matcher(query);
+			if (matcher.find()) {
 
-				m4.group();
-				int index_of_by = m4.group().indexOf("by");
-				orderByField = m4.group().substring(index_of_by + 3, m4.group().length());
+				matcher.group();
+				int index_of_by = matcher.group().indexOf("by");
+				orderByField = matcher.group().substring(index_of_by + 3, matcher.group().length());
 			}
-
 		}
 		return orderByField;
 	}
@@ -147,15 +146,13 @@ public class QueryParameters {
 	// finding the group by field of the query
 	public String setGroupBy(String query) {
 		if (query != null) {
-			Pattern p5 = Pattern.compile("(group by)[ ]?[A-Za-z_]+");
-			Matcher m5 = p5.matcher(query);
-
-			if (m5.find()) {
-				m5.group();
-				int index_of_by1 = m5.group().indexOf("by");
-				groupByField = m5.group().substring(index_of_by1 + 3, m5.group().length());
+			Pattern pattern = Pattern.compile("(group by)[ ]?[A-Za-z_]+");
+			Matcher matcher = pattern.matcher(query);
+			if (matcher.find()) {
+				matcher.group();
+				int index_of_by1 = matcher.group().indexOf("by");
+				groupByField = matcher.group().substring(index_of_by1 + 3, matcher.group().length());
 			}
-
 		}
 		return groupByField;
 	}
@@ -163,10 +160,10 @@ public class QueryParameters {
 	// finding the aggregate field the query
 	public ArrayList<String> setAggregate(String query) {
 		if (query != null) {
-			Pattern p6 = Pattern.compile("(sum|avg|min|max)(\\([A-Za-z_]*\\))");
-			Matcher m6 = p6.matcher(query);
-			while (m6.find()) {
-				aggregate.add(m6.group());
+			Pattern pattern = Pattern.compile("(sum|avg|min|max)(\\([A-Za-z_]*\\))");
+			Matcher matcher = pattern.matcher(query);
+			while (matcher.find()) {
+				aggregate.add(matcher.group());
 			}
 		}
 		return aggregate;
