@@ -19,9 +19,8 @@ public class Main {
 			QueryParameters qp = new QueryParameters();
 			System.out.println("Enter query");
 			// calling set query method
-
-			//String query = sc.nextLine();
-			String query = "select * from ipl.cvs ;";
+			String query = sc.nextLine();
+			//String query = "select * from ipl.cvs ;";
 			qp.setQuery(query);
 			System.out.println("You have entered");
 			// calling get query method
@@ -80,6 +79,7 @@ public class Main {
 						}
 					}
 				}
+				
 			}
 
 			else {
@@ -118,6 +118,16 @@ public class Main {
 							System.out.println(index);
 						}
 					}
+					for(int indexx = 1; indexx < 567; indexx++) {
+						String[] split = data.get(indexx).split(",");
+						for(int i=0;i<split.length;i++) {
+							if(i==0 || i==2) {
+								System.out.println(split[i]);
+							}
+							
+						}
+					}
+					System.out.println("hi");
 				}
 			}
 

@@ -37,8 +37,6 @@ public class QueryParameters {
 		return split;
 	}
 
-
-
 	// function to get the base part of query
 	public String setBasePart(String query) {
 
@@ -60,6 +58,7 @@ public class QueryParameters {
 		return baseQuery;
 
 	}
+
 	// function to get the after part of query
 	public String setAfterWherePart(String query) {
 		if (!query.equals("")) {
@@ -76,8 +75,7 @@ public class QueryParameters {
 		return afterWhereQuery;
 	}
 
-	
-	//function to set the file name
+	// function to set the file name
 	public ArrayList<String> setFileName(String query) {
 		if (!query.equals("")) {
 			Pattern p = Pattern.compile("[a-zA-Z0-9]+\\.(csv)");
@@ -88,8 +86,8 @@ public class QueryParameters {
 		}
 		return fileName;
 	}
-	
-	//function to get the conditions in the query
+
+	// function to get the conditions in the query
 	public ArrayList<String> setConditions(String query) {
 		if (query != null) {
 			Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)((<=)|(>=)|(<>)|=|>|<)([ ]?[']?[A-Za-z0-9]+[']?)");
@@ -101,9 +99,8 @@ public class QueryParameters {
 		}
 		return conditions;
 	}
-	
-	
-	//function to get the operators in the query
+
+	// function to get the operators in the query
 	public ArrayList<String> setOperator(String query) {
 		if (query != null) {
 			Pattern p3 = Pattern.compile("(and)|(or){2}|(not)");
@@ -115,8 +112,8 @@ public class QueryParameters {
 		}
 		return operators;
 	}
-	
-	//function to get all the condition of where clause
+
+	// function to get all the condition of where clause
 	public String[] setDesired(String query) {
 		if (query != null) {
 			int index_of_from = query.indexOf("from");
@@ -130,8 +127,8 @@ public class QueryParameters {
 		}
 		return selectedFieldsSplit;
 	}
-	
-	//finding the order by field of the query
+
+	// finding the order by field of the query
 	public String setOrderBy(String query) {
 		if (query != null) {
 			Pattern p4 = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
@@ -146,8 +143,8 @@ public class QueryParameters {
 		}
 		return orderByField;
 	}
-	
-	//finding the group by field of the query
+
+	// finding the group by field of the query
 	public String setGroupBy(String query) {
 		if (query != null) {
 			Pattern p5 = Pattern.compile("(group by)[ ]?[A-Za-z_]+");
@@ -162,8 +159,8 @@ public class QueryParameters {
 		}
 		return groupByField;
 	}
-	
-	//finding the aggregate field the query
+
+	// finding the aggregate field the query
 	public ArrayList<String> setAggregate(String query) {
 		if (query != null) {
 			Pattern p6 = Pattern.compile("(sum|avg|min|max)(\\([A-Za-z_]*\\))");
