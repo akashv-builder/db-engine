@@ -134,7 +134,6 @@ public class QueryParameters {
 			Pattern pattern = Pattern.compile("(order by)[ ]?[A-Za-z_]+");
 			Matcher matcher = pattern.matcher(query);
 			if (matcher.find()) {
-
 				matcher.group();
 				int index_of_by = matcher.group().indexOf("by");
 				orderByField = matcher.group().substring(index_of_by + 3, matcher.group().length());
