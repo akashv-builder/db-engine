@@ -109,25 +109,44 @@ public class Main {
 				System.out.println(conditionActual);
 				// reading the different component of a where query
 				int index = 0;
-				int[] indexarray = new int[10];
+				ArrayList<Integer> indexarray = new ArrayList<Integer>();
 				for (index = 0; index < headerSplit.length; index++) {
 					String element = headerSplit[index];
 					for (int j = 0; j < conditionName.size(); j++) {
 						if (element.equals(conditionName.get(j))) {
-							indexarray[j] = index;
+							indexarray.add(index);
 							System.out.println(index);
 						}
 					}
-					for(int indexx = 1; indexx < 567; indexx++) {
+				
+					/*for(int indexx = 1; indexx < 567; indexx++) {
 						String[] split = data.get(indexx).split(",");
 						for(int i=0;i<split.length;i++) {
-							if(i==0 || i==2) {
-								System.out.println(split[i]);
+							for(int j=0;j<indexarray.size();j++) {
+								if(i==indexarray.get(j)) {
+									System.out.println(split[i]);
+								}
 							}
 							
+							
 						}
+					}*/
+					//System.out.println("hi");
+				}
+				for(int j=0;j<indexarray.size();j++) {
+				for(int indexx = 1; indexx < 567; indexx++) {
+					String[] split = data.get(indexx).split(",");
+					for(int i=0;i<split.length;i++) {
+						
+							if(i==indexarray.get(j)) {
+								System.out.println(split[i]);
+								//if(split[i].equals())
+								
+							}
+						}
+						
+						
 					}
-					System.out.println("hi");
 				}
 			}
 
