@@ -64,13 +64,13 @@ public class Main {
 
 				} else {
 					// iterating the data and getting the desired output for command
-					// select city id from ipl.csv ;
+					// select city , id from ipl.csv ;
 					int index = 0;
 					for (index = 0; index < headerSplit.length; index++) {
 						String element = headerSplit[index];
 						for (int k = 0; k < noOfFields; k++) {
 							if (element.equals(desired[k])) {
-								for (int j = 0; j < 578; j++) {
+								for (int j = 0; j < data.size(); j++) {
 									String[] raw = data.get(j).split(",");
 									System.out.println(raw[index]);
 								}
@@ -78,9 +78,7 @@ public class Main {
 						}
 					}
 				}
-
 			}
-
 			else {
 				// iterating the data and getting the desired output for command
 				// select city id from ipl.csv where conditions;
@@ -95,7 +93,7 @@ public class Main {
 				if (s1 != null) {
 					Pattern p2 = Pattern.compile("([A-Za-z0-9]+[ ]?)(<=|>=|<>|=|>|<)([ ]?[']?)([A-Za-z0-9]+)([']?)");
 					Matcher m2 = p2.matcher(s1);
-					// getting all the desired conditions in arraylist
+					// getting all the desired conditions in array list
 					while (m2.find()) {
 						conditionName.add(m2.group(1));
 						conditionoperator.add(m2.group(2));
@@ -117,38 +115,56 @@ public class Main {
 							System.out.println(index);
 						}
 					}
+				}
+				// select * from ipl.csv where id>10 and city='banglore' ;
 
-					for (int indexx = 1; indexx < 567; indexx++) {
+				for (int j = 0; j < indexarray.size(); j++) {
+					for (int indexx = 1; indexx < data.size(); indexx++) {
 						String[] split = data.get(indexx).split(",");
-						for (int i = 0; i < split.length; i++) {
-							for (int j = 0; j < indexarray.size(); j++) {
+						switch (conditionoperator.get(j).charAt(0)) {
+						case '=':
+							for (int i = 0; i < split.length; i++) {
 								if (i == indexarray.get(j)) {
-									System.out.println(split[i]);
+									if (split[i].equalsIgnoreCase(conditionActual.get(0))) {
+
+										System.out.println(data.get(indexx));
+										// if(split[i].equals())
+									}
 								}
 							}
+							break;
+						case '<':
+							for (int i = 0; i < split.length; i++) {
 
-						}
-					}
-				}
-				for (int j = 0; j < indexarray.size(); j++) {
-					for (int indexx = 1; indexx < 567; indexx++) {
-						String[] split = data.get(indexx).split(",");
-						for (int i = 0; i < split.length; i++) {
+								if (i == indexarray.get(j)) {
+									if (Double.parseDouble(split[i]) < Double.parseDouble(conditionActual.get(0))) {
 
-							if (i == indexarray.get(j)) {
-								System.out.println(split[i]);
-								// if(split[i].equals())
-
+										System.out.println(data.get(indexx));
+									}
+								}
 							}
-						}
+							break;
+						case '>':
+							for (int i = 0; i < split.length; i++) {
 
+								if (i == indexarray.get(j)) {
+									if (Double.parseDouble(split[i]) > Double.parseDouble(conditionActual.get(0))) {
+
+										System.out.println(data.get(indexx));
+									}
+								}
+							}
+							break;
+						}
 					}
 				}
 			}
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			// catching the exceptions
-			System.out.println("incorrect query format");
+			System.out.println(e.fillInStackTrace() + "incorrect query format");
 		} finally {
 			sc.close();
 		}
