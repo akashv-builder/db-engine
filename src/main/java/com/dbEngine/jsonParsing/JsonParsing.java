@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.json.JSONObject;
 
-public class jsonParsing {
+public class JsonParsing {
 	private static void createJSON() {
 		JSONObject tomJsonObj = new JSONObject();
 		tomJsonObj.put("name", "Tom");
@@ -53,6 +53,6 @@ public class jsonParsing {
 	
 	
 	public static void main(String[] args) {
-		jsonParsing.createJSON();
+		JsonParsing.createJSON();
 	}
 }
