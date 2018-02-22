@@ -43,15 +43,13 @@ public class WhereQuery {
 			String[] headerSplit = header.split(",");
 			// getting after where part
 			String temp = queryParameter.setAfterWherePart(query);
+			ArrayList<String>selectAllFromFile=new ArrayList<String>();
 			if (temp == null) {
 				if (desired.length == 1 && desired[0].equals("*")) {
-					// iterating the data and getting the desired output for command
-					// select * from ipl.csv ;
-					Iterator<String> iterator = data.iterator();
-					System.out.println("List elements : ");
-
-					while (iterator.hasNext())
-						System.out.print(iterator.next() + "\n");
+					for(int i=1;i<data.size();i++) {
+						System.out.println(data.get(i));
+						selectAllFromFile.add(data.get(i));
+					}
 
 				} else {
 					// iterating the data and getting the desired output for command
