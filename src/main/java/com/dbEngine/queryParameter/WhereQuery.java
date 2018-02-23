@@ -4,7 +4,6 @@ import com.dbEngine.fileDataHandler.*;
 import com.dbEngine.queryParameter.QueryParameters;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
