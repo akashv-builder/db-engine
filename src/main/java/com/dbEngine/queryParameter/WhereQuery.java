@@ -8,9 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WhereQuery {
-
-	public void queryFire(String query) {
-		QueryParameters queryParameter = new QueryParameters();
+	ArrayList<String>jsonData=new ArrayList<String>();	
+	QueryParameters queryParameter = new QueryParameters();
+	public void queryFire(String query) {				
 		try {
 			// String query = "select * from ipl.cvs ;";
 			queryParameter.setQuery(query);
@@ -42,12 +42,11 @@ public class WhereQuery {
 			String[] headerSplit = header.split(",");
 			// getting after where part
 			String temp = queryParameter.setAfterWherePart(query);
-			ArrayList<String>selectAllFromFile=new ArrayList<String>();
 			if (temp == null) {
 				if (desired.length == 1 && desired[0].equals("*")) {
 					for(int i=1;i<data.size();i++) {
 						System.out.println(data.get(i));
-						selectAllFromFile.add(data.get(i));
+						jsonData.add(data.get(i));
 					}
 
 				} else {
@@ -61,6 +60,7 @@ public class WhereQuery {
 								for (int j = 0; j < data.size(); j++) {
 									String[] raw = data.get(j).split(",");
 									System.out.println(raw[index]);
+									jsonData.add(raw[index]);
 								}
 							}
 						}
@@ -114,6 +114,7 @@ public class WhereQuery {
 								if (i == indexarray.get(j)) {
 									if (split[i].equalsIgnoreCase(conditionActual.get(0))) {
 										System.out.println(data.get(indexx));
+										jsonData.add(data.get(indexx));
 									}
 								}
 							}
@@ -124,6 +125,7 @@ public class WhereQuery {
 								if (i == indexarray.get(j)) {
 									if (Double.parseDouble(split[i]) < Double.parseDouble(conditionActual.get(0))) {
 										System.out.println(data.get(indexx));
+										jsonData.add(data.get(indexx));
 									}
 								}
 							}
@@ -134,6 +136,7 @@ public class WhereQuery {
 								if (i == indexarray.get(j)) {
 									if (Double.parseDouble(split[i]) > Double.parseDouble(conditionActual.get(0))) {
 										System.out.println(data.get(indexx));
+										jsonData.add(data.get(indexx));
 									}
 								}
 							}
@@ -147,5 +150,8 @@ public class WhereQuery {
 			// catching the exceptions
 			System.out.println("incorrect query format");
 		}
+	}
+	public ArrayList<String>returnJson(){
+		return jsonData;
 	}
 }
