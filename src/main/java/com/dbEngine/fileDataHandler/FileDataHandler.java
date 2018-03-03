@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class FileDataHandler {
 	private ArrayList<String> fileStore = new ArrayList<String>();
 	private HashMap<String, String> mapDataType = new HashMap<String, String>();
-
+	String[] key;
 	public void setDataType() {
 
 		try {
@@ -19,7 +19,7 @@ public class FileDataHandler {
 			// reading line by line
 			String line = bfreader.readLine();
 			while (line != null) {
-				// addineach line to array list
+				// adding each line to array list
 				fileStore.add(line);
 				line = bfreader.readLine();
 			}
@@ -30,7 +30,7 @@ public class FileDataHandler {
 
 		// splitting the header field
 		String[] splitLine1 = fileStore.get(1).split(",");
-		String[] key = fileStore.get(0).split(",");
+		key = fileStore.get(0).split(",");
 		int len=splitLine1.length;
 
 		// determining the data type of each field
@@ -58,6 +58,9 @@ public class FileDataHandler {
 	// returning all the data
 	public ArrayList<String> getFileRecords() {
 		return fileStore;
+	}
+	public String[] returnKeys(){
+		return key;
 	}
 
 }
