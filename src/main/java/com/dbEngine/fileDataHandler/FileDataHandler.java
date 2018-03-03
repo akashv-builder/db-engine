@@ -19,7 +19,7 @@ public class FileDataHandler {
 			// reading line by line
 			String line = bfreader.readLine();
 			while (line != null) {
-				// adding each line to array list
+				// addineach line to array list
 				fileStore.add(line);
 				line = bfreader.readLine();
 			}
@@ -31,6 +31,7 @@ public class FileDataHandler {
 		// splitting the header field
 		String[] splitLine1 = fileStore.get(1).split(",");
 		String[] key = fileStore.get(0).split(",");
+		int len=splitLine1.length;
 
 		// determining the data type of each field
 		ArrayList<String> dataType = new ArrayList<String>();
@@ -44,7 +45,7 @@ public class FileDataHandler {
 		}
 
 		// putting key value pair in the map
-		for (int i = 0; i < 17; i++) {
+		for (int i = 0; i < len; i++) {
 			mapDataType.put(key[i], dataType.get(i));
 		}
 	}

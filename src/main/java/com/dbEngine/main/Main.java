@@ -11,8 +11,8 @@ public class Main {
 		// calling set query method String
 		// query = sc.nextLine();
 
-		String query = "select * from ipl.cvs ;";
-		WhereQuery firequery = new WhereQuery();
-		firequery.queryFire(query);
+		String query = "select * from ipl.cvs where city='bangalore' ;";
+		WhereQuery executeQuery = new WhereQuery();
+		executeQuery.queryFire(query);
 	}
 }
