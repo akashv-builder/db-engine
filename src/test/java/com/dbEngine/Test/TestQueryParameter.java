@@ -27,103 +27,103 @@ class TestQueryParameter {
 	}
 
 	@Test
-	void firstTest() {
+	void testingGetQuery() {
 		// testing get query method
 		assertEquals("select * from ipl.csv where id>100 ;", qp.getQuery());
-		System.out.println("First test method");
+		System.out.println("testing GetQuery()");
 	}
 
 	@Test
-	void secondTest() {
+	void testingTokenizeQuery() {
 		// testing tokenize query method
 		String query = "select * from ipl.csv where id>100 ;";
 		String[] arr = { "select", "*", "from", "ipl.csv", "where", "id>100", ";" };
 		assertArrayEquals(arr, qp.tokenizeQuery(query));
-		System.out.println("Second test method");
+		System.out.println("testing TokenizeQuery()");
 	}
 
 	@Test
-	void thirdTest() {
+	void testingSetBasePart() {
 		// testing set base part method
 		String query = "select * from ipl.csv where id>100 ;";
 		assertEquals("select * from ipl.csv", qp.setBasePart(query));
-		System.out.println("Third test method");
+		System.out.println("testing SetBaseWherePart()");
 	}
 
 	@Test
-	void fourthTest() {
+	void testingSetAfterWherePart() {
 		// testing after where part method
 		String query = "select * from ipl.csv where id>100 ;";
 		assertEquals("id>100 ;", qp.setAfterWherePart(query));
-		System.out.println("Fourth test method");
+		System.out.println("testing SetAfterWherePart()");
 	}
 
 	@Test
-	void fifthTest() {
+	void testingSetFileName() {
 		// testing set file name method
 		String query = "select * from ipl.csv where id>100 ;";
 		ArrayList<String> al = new ArrayList<String>();
 		al.add("ipl.csv");
 		assertEquals(al, qp.setFileName(query));
-		System.out.println("Fifth test method");
+		System.out.println("testing SetFileName()");
 	}
 
 	@Test
-	void sixthTest() {
+	void testingSetConditions() {
 		// testing set condition method
 		String query = "select * from ipl.csv where id>100 and city='Banglore' ;";
 		ArrayList<String> al = new ArrayList<String>();
 		al.add("id>100");
 		al.add("city='Banglore'");
 		assertEquals(al, qp.setConditions(query));
-		System.out.println("Sixth test method");
+		System.out.println("testing SetConditions()");
 	}
 
 	@Test
-	void seventhTest() {
+	void testingSetOperator() {
 		// testing set operator method
 		String query = "select * from ipl.csv where id>100 and city='Banglore' ;";
 		ArrayList<String> al = new ArrayList<String>();
 		al.add("and");
 		assertEquals(al, qp.setOperator(query));
-		System.out.println("Seventh test method");
+		System.out.println("testing SetOperator()");
 	}
 
 	@Test
-	void eighthTest() {
+	void testingSetDesired() {
 		// testing set desired method
 		String query = "select * from ipl.csv where id>100 and city='Banglore' ;";
 		String[] al = { "*" };
 		assertArrayEquals(al, qp.setDesired(query));
-		System.out.println("Eighth test method");
+		System.out.println("testingSetDesired");
 	}
 
 	@Test
-	void ninthTest() {
+	void testingSetOrderBy() {
 		// testing set order by method
 		String query = "select * from ipl.csv where id>100 and city='Banglore' order by city ;";
 		String al = "city";
 		assertEquals(al, qp.setOrderBy(query));
-		System.out.println("Nigth test method");
+		System.out.println("testing SetOrderBy()");
 	}
 
 	@Test
-	void tenthTest() {
+	void testingSetGroupBy() {
 		// testing set group by method
 		String query = "select * from ipl.csv where id>100 and city='Banglore' order by city group by id ;";
 		String al = "id";
 		assertEquals(al, qp.setGroupBy(query));
-		System.out.println("Tenth test method");
+		System.out.println("testing SetGroupBy()");
 	}
 
 	@Test
-	void eleventhTest() {
+	void testingSetAggregate() {
 		// testing set aggregate method
 		String query = "select * sum(id) from ipl.csv where id>100 and city='Banglore' order by city group by id ;";
 		ArrayList<String> al = new ArrayList<String>();
 		al.add("sum(id)");
 		assertEquals(al, qp.setAggregate(query));
-		System.out.println("Eleventh test method");
+		System.out.println("testing SetAggregate()");
 	}
 
 	// after each will execute after each test case
