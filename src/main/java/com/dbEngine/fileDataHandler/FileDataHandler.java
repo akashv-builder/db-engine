@@ -5,10 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class FileDataHandler {
 	private ArrayList<String> fileStore = new ArrayList<String>();
-	private HashMap<String, String> mapDataType = new HashMap<String, String>();
+	private LinkedHashMap<String, String> mapDataType = new LinkedHashMap<String, String>();
 	String[] key;
 	public void setDataType() {
 
@@ -51,7 +52,7 @@ public class FileDataHandler {
 	}
 
 	// returning the data types
-	public HashMap<String, String> getDataType() {
+	public LinkedHashMap<String, String> getDataType() {
 		return mapDataType;
 	}
 
