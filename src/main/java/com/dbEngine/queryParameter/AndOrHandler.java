@@ -9,42 +9,44 @@ import java.util.regex.Pattern;
 import com.dbEngine.fileDataHandler.FileDataHandler;
 
 public class AndOrHandler {
-	ArrayList<String> toBeReturned = new ArrayList<String>();
 
-	public ArrayList<String> retrieveWhereData(ArrayList<String> dataToOprate, ArrayList<Integer> index, ArrayList<String>  conditionoperator,
-			ArrayList<String> conditionActual,int noOfTime) {
+	public ArrayList<String> retrieveWhereData(ArrayList<String> dataToOprate, ArrayList<Integer> index,
+			ArrayList<String> conditionoperator, ArrayList<String> conditionActual, int noOfTime) {
+		ArrayList<String> toBeReturned = new ArrayList<String>();
+		for (int i = 1; i < dataToOprate.size(); i++) {
 
-			for (int i = 1; i < dataToOprate.size(); i++) {
-				String[] split = dataToOprate.get(i).split(",");
-				for (int j = 0; j < split.length; j++) {
-					if (j == index.get(noOfTime)) {
-						if (conditionoperator.get(noOfTime).equals("=")) {
-							if (split[j].equalsIgnoreCase(conditionActual.get(noOfTime))) {
-								toBeReturned.add(dataToOprate.get(i));
-							}
-						} else if (conditionoperator.get(noOfTime).equals("<")) {
-							if (Double.parseDouble(split[j]) < Double.parseDouble(conditionActual.get(noOfTime))) {
-								toBeReturned.add(dataToOprate.get(i));
-							}
-						} else if (conditionoperator.get(noOfTime).equals(">")) {
+			String[] split = dataToOprate.get(i).split(",");
 
-							if (Double.parseDouble(split[j]) > Double.parseDouble(conditionActual.get(noOfTime))) {
-								toBeReturned.add(dataToOprate.get(i));
-							}
+			for (int j = 0; j < split.length; j++) {
+				if (j == index.get(noOfTime)) {
+
+					if (conditionoperator.get(noOfTime).equals("=")) {
+						if (split[j].equalsIgnoreCase(conditionActual.get(noOfTime))) {
+							toBeReturned.add(dataToOprate.get(i));
 						}
+					} else if (conditionoperator.get(noOfTime).equals("<")) {
+						if (Double.parseDouble(split[j]) < Double.parseDouble(conditionActual.get(noOfTime))) {
+							toBeReturned.add(dataToOprate.get(i));
+						}
+					} else if (conditionoperator.get(noOfTime).equals(">")) {
 
+						if (Double.parseDouble(split[j]) > Double.parseDouble(conditionActual.get(noOfTime))) {
+							toBeReturned.add(dataToOprate.get(i));
+						}
 					}
 
 				}
+
 			}
-		
+		}
+
 		return toBeReturned;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String query = "select * from ipl.cvs where id>30 and city='bangalore';";
+		String query = "select * from ipl.cvs where id>500 or city='bangalore';";
 		QueryParameters queryParameter = new QueryParameters();
 		ArrayList<String> logicalOperator = new ArrayList<String>();
 
@@ -87,17 +89,22 @@ public class AndOrHandler {
 				}
 			}
 		}
-
+		ArrayList<String> semiResult = new ArrayList<String>();
+		ArrayList<String> finalResult = new ArrayList<String>();
 		AndOrHandler a = new AndOrHandler();
-		if(logicalOperator.get(0).equals("and")){
-			System.out.println("hi");
-			ArrayList<String> semiResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual,0);
-			ArrayList<String> finalResult= a.retrieveWhereData(semiResult, indexToSearch, conditionoperator, conditionActual,1);
+		System.out.println(logicalOperator.get(0));
+		if (logicalOperator.get(0).equals("and")) {
+			semiResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 0);
+			finalResult = a.retrieveWhereData(semiResult, indexToSearch, conditionoperator, conditionActual, 1);
 			System.out.println(finalResult);
 		}
 		else {
-			System.out.println("or");
+			semiResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 0);
+			finalResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 1);
+			semiResult.addAll(finalResult);
+			System.out.println(semiResult);
 		}
+
 	}
 
 }

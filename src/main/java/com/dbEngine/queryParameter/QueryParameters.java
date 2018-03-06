@@ -103,7 +103,7 @@ public class QueryParameters {
 	// function to get the operators in the query
 	public ArrayList<String> setOperator(String query) {
 		if (query != null) {
-			Pattern pattern = Pattern.compile("(and)|(or){2}|(not)");
+			Pattern pattern = Pattern.compile("(and)|(or)|(not)");
 			Matcher matcher = pattern.matcher(query);
 
 			while (matcher.find()) {
