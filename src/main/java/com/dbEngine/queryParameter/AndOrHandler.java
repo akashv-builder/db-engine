@@ -1,8 +1,11 @@
 package com.dbEngine.queryParameter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +39,6 @@ public class AndOrHandler {
 					}
 
 				}
-
 			}
 		}
 
@@ -46,11 +48,13 @@ public class AndOrHandler {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String query = "select * from ipl.cvs where id>500 or city='bangalore';";
+		String query = "select * from ipl.cvs where id>500 or city='bangalore' order by city;";
 		QueryParameters queryParameter = new QueryParameters();
 		ArrayList<String> logicalOperator = new ArrayList<String>();
 
 		logicalOperator = queryParameter.setOperator(query);
+
+		String orderByfield = queryParameter.setOrderBy(query);
 
 		ArrayList<String> conditionName = new ArrayList<String>();
 		ArrayList<String> conditionoperator = new ArrayList<String>();
@@ -96,15 +100,48 @@ public class AndOrHandler {
 		if (logicalOperator.get(0).equals("and")) {
 			semiResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 0);
 			finalResult = a.retrieveWhereData(semiResult, indexToSearch, conditionoperator, conditionActual, 1);
-			System.out.println(finalResult);
-		}
-		else {
+			// System.out.println(finalResult);
+		} else {
 			semiResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 0);
 			finalResult = a.retrieveWhereData(csvData, indexToSearch, conditionoperator, conditionActual, 1);
 			semiResult.addAll(finalResult);
-			System.out.println(semiResult);
+			// System.out.println(semiResult);
+			
+			 //Collections.reverse(semiResult); System.out.println(semiResult);
+			 
 		}
 
+		// order by
+
+		int indexOfordeBy = 0;
+		System.out.println(orderByfield);
+		for (int i = 0; i < obejectOfKey.length; i++) {
+			if (obejectOfKey[i].equals(orderByfield)) {
+				indexOfordeBy = i;
+			}
+		}
+		System.out.println(indexOfordeBy);
+		ArrayList<String> orderByFieldData= new ArrayList<String>();
+		
+		//get a specific field
+		for (int i = 1; i < csvData.size(); i++) {
+			String[] split = csvData.get(i).split(",");
+			for (int j = 0; j < split.length; j++) {
+				if (j == indexOfordeBy) {
+					//System.out.println(split[j]);
+					orderByFieldData.add(split[j]);
+				}
+			}
+		}
+		HashMap<String, String>sortedByKey=new HashMap<String, String>();
+		
+		Collections.sort(orderByFieldData);
+		System.out.println(orderByFieldData);
+		for (int i = 0; i < csvData.size()-1; i++) {
+			sortedByKey.put(orderByFieldData.get(i), csvData.get(i));		
+		}
+		//System.out.println(sortedByKey.keySet());
+		
 	}
 
 }
